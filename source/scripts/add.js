@@ -15,6 +15,11 @@ window.addEventListener("DOMContentLoaded", init);
 /**
  * @function init
  * Starts the task program, all function calls trace back here
+ * 
+ * 
+ * 
+ * 
+ * 
  */
 function init() {
   let tasks = getTasksFromStorage();

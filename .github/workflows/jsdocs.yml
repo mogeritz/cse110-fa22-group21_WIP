@@ -1,0 +1,31 @@
+name: Compile JSDocs
+on:
+  push:
+    branches: "main"
+
+
+jobs:
+  compile_JSDocs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: JSDocs Generation
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: source
+          output_dir: docs
+          template: minami
+          recurse: true
+
+      - name: commit and push updated docs to the branch
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            git config --global user.name 'JSDocs action'
+            git config --global user.email 'jsdocs@users.noreply.github.com'
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+            git add .
+            git commit -m "Updated JSDocs"
+            git push
+          fi

@@ -12,7 +12,10 @@ var data = [];
 // Run the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
 
-// Starts the task program, all function calls trace back here
+/**
+ * @function init
+ * Starts the task program, all function calls trace back here
+ */
 function init() {
   let tasks = getTasksFromStorage();
   // Add each task to the <tbody> element
@@ -30,6 +33,7 @@ document.getElementById("cancelButton").addEventListener("click", closeForm);
 /*
  * Add button function
  * Once the user clicks on the add button, the popup form should pop up
+ * Digga was ist hier los amena
  */
 function openForm() {
   document.getElementById("popupForm").style.display = "block";

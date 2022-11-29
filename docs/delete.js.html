@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>delete.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -30,25 +30,44 @@ Starts the task program, all function calls trace back here</a></span></li><li c
 
 <div id="main">
     
+    <h1 class="page-title">delete.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Import functions from add.js
+import { getTasksFromStorage, saveTaskToStorage } from "./add.js";
 
+/**
+ * Reads 'to-do-tasks' from localStorage, removes the task with the given ID
+ * And then rewrites the updated list of Tasks back to local storage.
+ * Then, it reloads the page to refresh the task list
+ * @param {number} id ID of the task to be removed from local storage
+ */
+function deleteTaskById(id){
+    // Obtain tasks from storage
+    const taskList = getTasksFromStorage();
+    // iterate until we find the ID
+    for (var i = 0; i &lt; taskList.length; i++) {
+        // delete the ID
+        if (taskList[i].id == id){
+            taskList.splice(i, 1);
+        }
+    }
+    // Save all other tasks back to storage
+    saveTaskToStorage(taskList);
+    // Reload the page with the new contents
+    location.reload();
+}
 
-
-
-
-
-
-
-
-    
-
-
-
+export { deleteTaskById };</code></pre>
+        </article>
+    </section>
 
 
 

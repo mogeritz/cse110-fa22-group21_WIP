@@ -19,15 +19,15 @@ jobs:
           template: minami
           recurse: true
 
-      - name: Take Ownership
-        run: git config --global --add safe.directory /github/workspace
-
       - name: Check for changes in docs
         id: check-changes
-        uses: mskri/check-uncommitted-changes-action@v1.0.1
+        run: | 
+          HasDiff=$([[git status --porcelain]])
+          echo $HasDiff
+          echo "::set-output name=docs_changed::$HasDiff"
 
       - name: commit and push updated docs to the branch
-        if: steps.check-changes.outputs.outcome == failure()
+        if: steps.check-changes.outputs.outcome == true
         run: |
           git config --global user.name 'JSDocs action'
           git config --global user.email 'jsdocs@users.noreply.github.com'

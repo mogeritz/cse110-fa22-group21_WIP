@@ -1,6 +1,6 @@
 name: Compile JSDocs
 on:
-  pull_request:
+  push:
     branches: "main"
 
 
@@ -8,9 +8,6 @@ jobs:
   compile_JSDocs:
     runs-on: ubuntu-latest
     steps:
-
-      - run: echo "$GITHUB_REF"
-
       - name: Checkout code
         uses: actions/checkout@v3
 

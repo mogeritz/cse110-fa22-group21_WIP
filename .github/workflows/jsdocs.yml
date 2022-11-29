@@ -11,6 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: before
+        run: |
+          yeet=$(ls source/docs)
+          echo "$yeet"
+
       - name: JSDocs Generation
         uses: andstor/jsdoc-action@v1
         with:
@@ -21,9 +26,8 @@ jobs:
       - name: Check for changes in docs
         id: check-changes
         run: | 
-          touch yeet.txt
           HasDiff=$(git status)
-          yeet=$(ls)
+          yeet=$(ls source/docs)
           echo "$yeet"
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"

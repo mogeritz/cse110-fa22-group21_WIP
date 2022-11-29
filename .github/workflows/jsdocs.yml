@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - run: git checkout origin/${GITHUB_HEAD_REF}
+        with:
+          ref: "${GITHUB_HEAD_REF}"
 
       - name: JSDocs Generation
         uses: andstor/jsdoc-action@v1

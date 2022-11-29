@@ -20,11 +20,14 @@ jobs:
           recurse: true
 
       - name: Check for changes in docs
-        id: changes
-        uses: UnicornGlobal/has-changes-action@v1.0.11
+        id: check-changes
+        run: | 
+          HasDiff=$(git status --porcelain)
+          echo "$HasDiff"
+          echo "::set-output name=docs_changed::$HasDiff"
 
       - name: commit and push updated docs to the branch
-        if: steps.changes.outputs.changed == 1
+        if: steps.check-changes.outputs.docs_changed == true
         run: |
           git config --global user.name 'JSDocs action'
           git config --global user.email 'jsdocs@users.noreply.github.com'

@@ -38,9 +38,6 @@ jobs:
     steps:
       - name: Check out main branch
         uses: actions/checkout@v3
-      - name: Tell git to ignore admin data
-        run: |
-          git update-index --assume-unchanged admin 
       - name: Merge main to gh-pages
         uses: devmasx/merge-branch@master
         with:

@@ -23,7 +23,7 @@ jobs:
         id: check-changes
         run: | 
           HasDiff=$(git status --porcelain)
-          echo "BRRUUUUUUUUUUUUUUHHHHHHHHHHHHHHHHHHHHHHh"
+          echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"
 
       - name: commit and push updated docs to the branch

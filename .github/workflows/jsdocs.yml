@@ -20,20 +20,11 @@ jobs:
           recurse: true
 
       - name: Check for changes in docs
-        id: check_file_changed
-        shell: pwsh
-        run: |
-          $diff = git diff HEAD
-
-          echo $diff
-
-          $SourceDiff = $diff | Where-Object { $_ -match '^docs/' }
-          $HasDiff = $SourceDiff.Length -gt 0
-
-          Write-Host "::set-output name=docs_changed::$HasDiff"
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
 
       - name: commit and push updated docs to the branch
-        if: steps.check_file_changed.outputs.docs_changed == 'True'
+        if: steps.changes.outputs.changed == 1
         run: |
           git config --global user.name 'JSDocs action'
           git config --global user.email 'jsdocs@users.noreply.github.com'

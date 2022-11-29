@@ -26,6 +26,8 @@ jobs:
 
       - name: commit and push updated docs to the branch
         run: |
+          echo ${BRANCH_NAME}
+          echo ${GITHUB_HEAD_REF}
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'JSDocs action'
             git config --global user.email 'jsdocs@users.noreply.github.com'

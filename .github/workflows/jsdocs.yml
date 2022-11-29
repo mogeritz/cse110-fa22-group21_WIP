@@ -8,13 +8,9 @@ jobs:
   compile_JSDocs:
     runs-on: ubuntu-latest
     steps:
-      - name: Print branch name
-        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-
       - name: Checkout code
         uses: actions/checkout@v3
+        run: git checkout ${GITHUB_HEAD_REF}
 
       - name: JSDocs Generation
         uses: andstor/jsdoc-action@v1
@@ -26,8 +22,6 @@ jobs:
 
       - name: commit and push updated docs to the branch
         run: |
-          echo ${BRANCH_NAME}
-          echo ${GITHUB_HEAD_REF}
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'JSDocs action'
             git config --global user.email 'jsdocs@users.noreply.github.com'

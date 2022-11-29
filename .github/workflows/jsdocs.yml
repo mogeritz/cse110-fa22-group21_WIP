@@ -19,24 +19,14 @@ jobs:
           template: minami
           recurse: true
 
-      - name: Check for changes in docs
-        id: check-changes
-        run: | 
-          if [[ `git status --porcelain` ]]; then
-            HasDiff=true
-          else
-            HasDiff=false
-          fi
-          echo "$HasDiff"
-          echo "::set-output name=docs_changed::$HasDiff"
-          echo "${{ steps.check-changes.outputs.docs_changed }}"
-
       - name: commit and push updated docs to the branch
         if: steps.check-changes.outputs.docs_changed == true
         run: |
-          git config --global user.name 'JSDocs action'
-          git config --global user.email 'jsdocs@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git add .
-          git commit -m "Updated JSDocs"
-          git push
+          if [[ `git status --porcelain` ]]; then
+            git config --global user.name 'JSDocs action'
+            git config --global user.email 'jsdocs@users.noreply.github.com'
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+            git add .
+            git commit -m "Updated JSDocs"
+            git push
+          fi

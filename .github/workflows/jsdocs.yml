@@ -22,6 +22,7 @@ jobs:
       - name: Check for changes in docs
         id: check-changes
         run: | 
+          touch yeet.txt
           HasDiff=$(git status)
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"

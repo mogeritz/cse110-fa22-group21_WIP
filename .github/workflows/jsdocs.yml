@@ -19,15 +19,14 @@ jobs:
           recurse: true
 
       - name: Check for changes in docs
-          shell: pwsh
-          id: check_file_changed
-          run: |
-            $diff = git diff HEAD^ HEAD
+        id: check_file_changed
+        run: |
+          $diff = git diff HEAD^ HEAD
 
-            $SourceDiff = $diff | Where-Object { $_ -match '^docs/' }
-            $HasDiff = $SourceDiff.Length -gt 0
+          $SourceDiff = $diff | Where-Object { $_ -match '^docs/' }
+          $HasDiff = $SourceDiff.Length -gt 0
 
-            Write-Host "::set-output name=docs_changed::$HasDiff"
+          Write-Host "::set-output name=docs_changed::$HasDiff"
 
       - name: commit and push updated docs to the branch
         if: steps.check_file_changed.outputs.docs_changed == 'True'

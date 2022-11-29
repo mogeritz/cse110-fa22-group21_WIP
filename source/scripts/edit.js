@@ -54,6 +54,7 @@ function openEditForm(id) {
 
 /*
  * Cancel Edit button function
+ * BRUUUUUUUUUUUUUUUUUUUUUUUUH
  * Once the use click on the button, the edit popup form should be closed
  */
 function closeEditForm() {

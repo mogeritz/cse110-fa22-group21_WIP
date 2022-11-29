@@ -25,6 +25,8 @@ jobs:
         run: |
           $diff = git diff HEAD
 
+          echo $diff
+
           $SourceDiff = $diff | Where-Object { $_ -match '^docs/' }
           $HasDiff = $SourceDiff.Length -gt 0
 

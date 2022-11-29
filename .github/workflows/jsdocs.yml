@@ -23,7 +23,7 @@ jobs:
         id: check_file_changed
         shell: pwsh
         run: |
-          $diff = git diff HEAD^ HEAD
+          $diff = git diff HEAD
 
           $SourceDiff = $diff | Where-Object { $_ -match '^docs/' }
           $HasDiff = $SourceDiff.Length -gt 0

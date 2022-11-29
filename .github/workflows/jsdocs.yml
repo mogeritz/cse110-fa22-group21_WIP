@@ -20,7 +20,6 @@ jobs:
           recurse: true
 
       - name: commit and push updated docs to the branch
-        if: steps.check-changes.outputs.docs_changed == true
         run: |
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'JSDocs action'

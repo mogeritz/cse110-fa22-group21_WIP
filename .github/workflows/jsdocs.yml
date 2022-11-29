@@ -11,13 +11,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: "$GITHUB_HEAD_REF"
+          ref: ${{ env.GITHUB_HEAD_REF }}
 
       - name: JSDocs Generation
         uses: andstor/jsdoc-action@v1
         with:
           source_dir: source
-          output_dir: source/docs
+          output_dir: docs
           template: minami
           recurse: true
 

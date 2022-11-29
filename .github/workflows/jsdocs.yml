@@ -22,7 +22,7 @@ jobs:
       - name: Check for changes in docs
         id: check-changes
         run: | 
-          HasDiff=$(git status --porcelain)
+          HasDiff=$(git status)
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"
 

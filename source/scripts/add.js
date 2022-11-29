@@ -33,6 +33,7 @@ document.getElementById("cancelButton").addEventListener("click", closeForm);
 /*
  * Add button function
  * Once the user clicks on the add button, the popup form should pop up
+ * Digga was ist hier los amena
  */
 function openForm() {
   document.getElementById("popupForm").style.display = "block";

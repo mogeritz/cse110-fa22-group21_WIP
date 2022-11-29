@@ -27,7 +27,7 @@ jobs:
         id: check-changes
         run: | 
           HasDiff=$(git status)
-          yeet=$(ls source)
+          yeet=$(ls source/docs)
           echo "$yeet"
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"

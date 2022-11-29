@@ -19,7 +19,11 @@ jobs:
           template: minami
           recurse: true
 
-      - name: commit and push updated docs to the branch
+      - name: Remove Timestamps
+        run: |
+          sed -E 's/[0-9]{2}:[0-9]{2}:[0-9]{2}//' docs/*
+
+      - name: commit and push updated docs to the branch if changes were made
         run: |
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'JSDocs action'

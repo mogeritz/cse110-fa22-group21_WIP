@@ -8,6 +8,9 @@ jobs:
   compile_JSDocs:
     runs-on: ubuntu-latest
     steps:
+      - name: Print branch name
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+
       - name: Checkout code
         uses: actions/checkout@v3
 

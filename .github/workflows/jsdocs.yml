@@ -11,29 +11,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: before
-        run: |
-          yeet=$(ls source)
-          echo "$yeet"
-
       - name: JSDocs Generation
         uses: andstor/jsdoc-action@v1
         with:
           source_dir: source
           output_dir: source/docs
+          template: minami
           recurse: true
 
       - name: Check for changes in docs
-        id: check-changes
-        run: | 
-          HasDiff=$(git status)
-          yeet=$(ls source/docs)
-          echo "$yeet"
-          echo "$HasDiff"
-          echo "::set-output name=docs_changed::$HasDiff"
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
 
       - name: commit and push updated docs to the branch
-        if: steps.check-changes.outputs.outcome == true
+        if: steps.changes.outputs.changed == 1
         run: |
           git config --global user.name 'JSDocs action'
           git config --global user.email 'jsdocs@users.noreply.github.com'

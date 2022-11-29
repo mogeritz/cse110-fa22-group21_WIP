@@ -1,11 +1,11 @@
-name: Compile_JSDocs
+name: Compile JSDocs
 on:
   pull_request:
     branches: "main"
 
 
 jobs:
-  compile JSDocs:
+  compile_JSDocs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

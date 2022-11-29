@@ -13,7 +13,7 @@ jobs:
 
       - name: before
         run: |
-          yeet=$(ls source/docs)
+          yeet=$(ls source)
           echo "$yeet"
 
       - name: JSDocs Generation
@@ -27,7 +27,7 @@ jobs:
         id: check-changes
         run: | 
           HasDiff=$(git status)
-          yeet=$(ls source/docs)
+          yeet=$(ls source)
           echo "$yeet"
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"

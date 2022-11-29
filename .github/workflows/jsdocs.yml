@@ -24,6 +24,7 @@ jobs:
         run: | 
           touch yeet.txt
           HasDiff=$(git status)
+          echo "$PWD"
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"
 

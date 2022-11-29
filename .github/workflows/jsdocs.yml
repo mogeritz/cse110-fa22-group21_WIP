@@ -29,6 +29,7 @@ jobs:
           fi
           echo "$HasDiff"
           echo "::set-output name=docs_changed::$HasDiff"
+          echo "${{ steps.check-changes.outputs.docs_changed }}"
 
       - name: commit and push updated docs to the branch
         if: steps.check-changes.outputs.docs_changed == true

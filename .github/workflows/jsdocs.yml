@@ -23,7 +23,7 @@ jobs:
         id: check-changes
         run: | 
           HasDiff=$(git status --porcelain)
-          evale=$($HasDiff == true)
+          evale=$("$HasDiff" == true)
           echo "$HasDiff"
           echo "$evale"
           echo "::set-output name=docs_changed::$HasDiff"

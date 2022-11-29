@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: "main"
 
+
 jobs:
   compile JSDocs:
     runs-on: ubuntu-latest

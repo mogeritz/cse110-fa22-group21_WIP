@@ -19,6 +19,9 @@ jobs:
           template: minami
           recurse: true
 
+      - name: Take Ownership
+        run: git config --global --add safe.directory /github/workspace
+
       - name: Check for changes in docs
         id: check-changes
         uses: mskri/check-uncommitted-changes-action@v1.0.1

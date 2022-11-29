@@ -14,8 +14,8 @@ jobs:
       - name: JSDocs Generation
         uses: andstor/jsdoc-action@v1
         with:
-          source_dir: ./source
-          output_dir: ./source/docs
+          source_dir: source
+          output_dir: source/docs
           template: minami
           recurse: true
 

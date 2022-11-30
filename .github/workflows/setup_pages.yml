@@ -4,44 +4,7 @@ on:
   push:
     branches: ["main"]
 jobs:
-  compile_JSDocs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get and apply GH_TOKEN
-        if: env.GH_TOKEN == ''
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
-
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          token: ${{ env.GH_TOKEN }}
-
-      - name: JSDocs Generation
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: source
-          output_dir: docs
-          template: minami
-          recurse: true
-
-      - name: Remove Timestamps
-        run: |
-          sed -i -E 's/[0-9]{2}:[0-9]{2}:[0-9]{2}//' docs/*.html
-
-      - name: commit and push updated docs to the branch if changes were made
-        run: |
-          if [[ `git status --porcelain` ]]; then
-            git config --global user.name 'JSDocs action'
-            git config --global user.email 'jsdocs@users.noreply.github.com'
-            git remote set-url origin https://x-access-token:${{ env.GH_TOKEN }}@github.com/$GITHUB_REPOSITORY
-            git add .
-            git commit -m "Updated JSDocs"
-            git push origin main --force
-          fi
   merge_main:
-    needs: compile_JSDocs
     runs-on: ubuntu-latest
     steps:
       - name: Check out main branch
@@ -70,4 +33,35 @@ jobs:
           git add .
           git commit --allow-empty -m "Updated html files in root"
           git push
+    compile_JSDocs:
+    needs: merge_main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - name: JSDocs Generation
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: source
+          output_dir: docs
+          template: minami
+          recurse: true
+
+      - name: Remove Timestamps
+        run: |
+          sed -i -E 's/[0-9]{2}:[0-9]{2}:[0-9]{2}//' docs/*.html
+
+      - name: commit and push updated docs to the branch if changes were made
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            git config --global user.name 'JSDocs action'
+            git config --global user.email 'jsdocs@users.noreply.github.com'
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+            git add .
+            git commit -m "Updated JSDocs"
+            git push
+          fi
       

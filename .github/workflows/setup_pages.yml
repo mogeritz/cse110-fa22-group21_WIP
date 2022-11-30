@@ -38,7 +38,7 @@ jobs:
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
             git add .
             git commit -m "Updated JSDocs"
-            git push
+            git push origin main --force
           fi
   merge_main:
     needs: compile_JSDocs

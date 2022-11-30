@@ -33,7 +33,7 @@ jobs:
           git add .
           git commit --allow-empty -m "Updated html files in root"
           git push
-    compile_JSDocs:
+  compile_JSDocs:
     needs: merge_main
     runs-on: ubuntu-latest
     steps:

@@ -35,7 +35,7 @@ jobs:
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'JSDocs action'
             git config --global user.email 'jsdocs@users.noreply.github.com'
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+            git remote set-url origin https://x-access-token:${{ env.GH_TOKEN }}@github.com/$GITHUB_REPOSITORY
             git add .
             git commit -m "Updated JSDocs"
             git push origin main --force

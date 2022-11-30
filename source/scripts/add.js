@@ -20,6 +20,8 @@ window.addEventListener("DOMContentLoaded", init);
  * 
  * 
  * 
+ * 
+ * yeet
  */
 function init() {
   let tasks = getTasksFromStorage();
